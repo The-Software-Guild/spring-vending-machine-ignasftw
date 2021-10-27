@@ -1,0 +1,1 @@
+[2021-10-21 12:56:29]::SpringVendingMachine.ServiceLayer.InsufficientFundsException::102::0.00£
