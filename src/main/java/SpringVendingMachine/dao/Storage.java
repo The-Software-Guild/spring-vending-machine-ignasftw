@@ -1,12 +1,12 @@
 package SpringVendingMachine.dao;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public interface Storage {
     void addItem(Data item);
     void updateItem(int id, Data item);
     void removeItem(int id);
-    HashMap<Integer, Data> getItems();
+    Map<Integer, Data> getItems();
     Data getItem(int id);
     int getLastId();
 }

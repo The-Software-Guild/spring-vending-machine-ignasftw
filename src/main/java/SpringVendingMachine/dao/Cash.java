@@ -9,12 +9,12 @@ public enum Cash {
     TWENTY_PENCES(new BigDecimal("0.20")),
     TEN_PENCES(new BigDecimal("0.10")),
     FIVE_PENCES(new BigDecimal("0.05")),
-    TWO_PENCES (new BigDecimal("0.02")),
-    ONE_PENCE (new BigDecimal("0.01"));
+    TWO_PENCES(new BigDecimal("0.02")),
+    ONE_PENCE(new BigDecimal("0.01"));
 
     public final BigDecimal label;
 
-    Cash(BigDecimal label){
+    Cash(BigDecimal label) {
         this.label = label;
     }
 }

@@ -2,15 +2,16 @@ package SpringVendingMachine.servicelayer;
 
 import SpringVendingMachine.view.UserInput;
 import SpringVendingMachine.view.UserOutput;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestInterface implements UserOutput, UserInput,TestInterfaceInterf {
+public class TestInterface implements UserOutput, UserInput, TestInterfaceInterf {
     private List<Integer> inputs = new ArrayList<>();
     private int inputIndex = 0;
 
-    public void setInputs(List<Integer> inputs){
+    public void setInputs(List<Integer> inputs) {
         this.inputs = inputs;
     }
 
@@ -22,7 +23,7 @@ public class TestInterface implements UserOutput, UserInput,TestInterfaceInterf 
     }
 
     @Override
-    public int countUserInput(int max) {
+    public int getIntUserInput(int max) {
         int newNumber = inputs.get(inputIndex);
         inputIndex++;
         return newNumber;

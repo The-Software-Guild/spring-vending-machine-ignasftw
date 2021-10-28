@@ -6,16 +6,16 @@ public class Audit {
     private final LocalDateTime occurrence;
     private final String message;
 
-    public Audit(String message){
+    public Audit(String message) {
         occurrence = LocalDateTime.now();
         this.message = message;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return this.message;
     }
 
-    public LocalDateTime getOccurrence(){
+    public LocalDateTime getOccurrence() {
         return this.occurrence;
     }
 }

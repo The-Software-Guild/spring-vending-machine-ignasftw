@@ -21,27 +21,27 @@ public class VendingMachineTesting {
     Control control;
     List<Integer> inputs = new ArrayList<>();
 
-    public VendingMachineTesting(){
+    public VendingMachineTesting() {
         ApplicationContext ctx =
                 new ClassPathXmlApplicationContext("applicationContext.xml");
         userInterface = ctx.getBean("userInterface", TestInterface.class);
         storage = ctx.getBean("dataStorage", DataStorage.class);
-        control = ctx.getBean("controller",Control.class);
+        control = ctx.getBean("controller", Control.class);
     }
 
     @Test
-    public void insufficientFundsExceptionThrows(){
+    public void insufficientFundsExceptionThrows() {
         inputs.clear();
         inputs.add(2);
         inputs.add(102);
         inputs.add(4);
         userInterface.setInputs(inputs);
-        InsufficientFundsException exception = assertThrows(InsufficientFundsException.class,()->control.start());
+        InsufficientFundsException exception = assertThrows(InsufficientFundsException.class, () -> control.start());
         Assert.assertEquals("Sorry, insufficient funds. Current amount: [0.00] item price [1.99]", exception.getMessage());
     }
 
     @Test
-    public void noItemInventoryExceptionThrows(){
+    public void noItemInventoryExceptionThrows() {
         inputs.clear();
         inputs.add(1);
         inputs.add(10);
@@ -49,7 +49,7 @@ public class VendingMachineTesting {
         inputs.add(101);
         inputs.add(4);
         userInterface.setInputs(inputs);
-        NoItemInventoryException exception = assertThrows(NoItemInventoryException.class,()->control.start());
+        NoItemInventoryException exception = assertThrows(NoItemInventoryException.class, () -> control.start());
         Assert.assertEquals("The item [101] ItemNr1 is out of stock.", exception.getMessage());
     }
 
@@ -64,9 +64,9 @@ public class VendingMachineTesting {
             e.printStackTrace();
         }
         Data item = storage.getItem(100);
-        Boolean test =  item.getName().equals("ItemNr1") &&
-                        item.getPrice().compareTo(new BigDecimal("0.99")) == 0 &&
-                        item.getAmount() == 0;
+        Boolean test = item.getName().equals("ItemNr1") &&
+                item.getPrice().compareTo(new BigDecimal("0.99")) == 0 &&
+                item.getAmount() == 0;
         ;
         Assert.assertTrue(test);
     }
@@ -82,7 +82,7 @@ public class VendingMachineTesting {
             e.printStackTrace();
         }
         Data item = storage.getItem(101);
-        Boolean test =  item.getName().equals("ItemNr1") &&
+        Boolean test = item.getName().equals("ItemNr1") &&
                 item.getPrice().compareTo(new BigDecimal("0.99")) == 0 &&
                 item.getAmount() == 0;
         ;
@@ -105,7 +105,7 @@ public class VendingMachineTesting {
         itemUpdated.updateAmount(10);
         itemUpdated.updatePrice(new BigDecimal("0.49"));
 
-        Boolean test =  item.getName().equals("ItemNr1") &&
+        Boolean test = item.getName().equals("ItemNr1") &&
                 item.getPrice().compareTo(new BigDecimal("0.99")) == 0 &&
                 item.getAmount() == 0;
         ;

@@ -1,4 +1,5 @@
 package SpringVendingMachine.controller;
+
 import SpringVendingMachine.dao.Data;
 import SpringVendingMachine.dao.Storage;
 
@@ -10,25 +11,25 @@ import java.util.Scanner;
 
 public class FileModifier {
     private List<Data> data = new ArrayList<>();
-    private final String path = System.getProperty("user.dir")+"/src/main/java/SpringVendingMachine/dao/";
-    private final File myObj = new File(path+"ItemStorage.txt");
+    private final String path = System.getProperty("user.dir") + "/src/main/java/SpringVendingMachine/dao/";
+    private final File myObj = new File(path + "ItemStorage.txt");
 
     public void readFile() throws FileNotFoundException {
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String row = myReader.nextLine();
-                String[] tokens=row.split("::");
-                Data item = new Data();
-                item.setItem(tokens[0], new BigDecimal(tokens[1]), Integer.parseInt(tokens[2]));
-                data.add(item);
-            }
-            myReader.close();
+        Scanner myReader = new Scanner(myObj);
+        while (myReader.hasNextLine()) {
+            String row = myReader.nextLine();
+            String[] tokens = row.split("::");
+            Data item = new Data();
+            item.setItem(tokens[0], new BigDecimal(tokens[1]), Integer.parseInt(tokens[2]));
+            data.add(item);
+        }
+        myReader.close();
     }
 
-    public void writeFile(Storage data){
+    public void writeFile(Storage data) {
         try {
-            PrintWriter out = new PrintWriter(new FileWriter(path+"ItemStorage.txt"));
-            for(Data row : data.getItems().values()){
+            PrintWriter out = new PrintWriter(new FileWriter(path + "ItemStorage.txt"));
+            for (Data row : data.getItems().values()) {
                 out.println(String.format(
                         "%s::%s::%s",
                         row.getName(),
@@ -43,7 +44,7 @@ public class FileModifier {
         }
     }
 
-    public List<Data> getData(){
+    public List<Data> getData() {
         return data;
     }
 }

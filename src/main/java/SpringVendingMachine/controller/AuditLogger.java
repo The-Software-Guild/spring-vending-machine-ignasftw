@@ -1,6 +1,7 @@
 package SpringVendingMachine.controller;
 
 import SpringVendingMachine.dao.Audit;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,14 +11,14 @@ import java.util.List;
 
 
 public class AuditLogger {
-    private final String path = System.getProperty("user.dir")+"/src/main/java/SpringVendingMachine/dao/";
+    private final String path = System.getProperty("user.dir") + "/src/main/java/SpringVendingMachine/dao/";
     private List<Audit> audits = new ArrayList<>();
 
-    public void writeFile(Audit data){
+    public void writeFile(Audit data) {
         audits.add(data);
         try {
-            PrintWriter out = new PrintWriter(new FileWriter(path+"AuditLog.txt"));
-            for(Audit row : audits){
+            PrintWriter out = new PrintWriter(new FileWriter(path + "AuditLog.txt"));
+            for (Audit row : audits) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String formatDateTime = row.getOccurrence().format(formatter);
 

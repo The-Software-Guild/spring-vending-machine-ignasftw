@@ -1,24 +1,25 @@
 package SpringVendingMachine.dao;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class DataStorage implements Storage{
-    private Integer i=100;
-    private HashMap<Integer, Data> itemMap= new HashMap<>();
+public class DataStorage implements Storage {
+    private int i = 100;
+    private Map<Integer, Data> itemMap = new HashMap<>();
 
-    public void addItem(Data item){
-        itemMap.put(i++,item);
+    public void addItem(Data item) {
+        itemMap.put(i++, item);
     }
 
-    public void updateItem(int id, Data item){
+    public void updateItem(int id, Data item) {
         itemMap.replace(id, item);
     }
 
-    public void removeItem(int id){
+    public void removeItem(int id) {
         itemMap.remove(id);
     }
 
-    public HashMap<Integer, Data> getItems() {
+    public Map<Integer, Data> getItems() {
         return itemMap;
     }
 
@@ -26,7 +27,7 @@ public class DataStorage implements Storage{
         return itemMap.get(id);
     }
 
-    public int getLastId(){
+    public int getLastId() {
         return i;
     }
 }

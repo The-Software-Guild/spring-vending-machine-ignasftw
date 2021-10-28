@@ -25,7 +25,7 @@ public class Control {
 
     private final String[] options = {"INSERT", "SELECT", "LIST", "EXIT"};
 
-    public Control(UserInput userInput, UserOutput userOutput, Storage storage){
+    public Control(UserInput userInput, UserOutput userOutput, Storage storage) {
         this.userInput = userInput;
         this.userOutput = userOutput;
         this.storage = storage;
@@ -33,56 +33,62 @@ public class Control {
 
     public void start() throws NoItemInventoryException, InsufficientFundsException {
         String input;
+        boolean isFile = true;
         currentMoney = new BigDecimal("0.00");
 
-        try{
+        try {
             fileMod.readFile();
-        }
-        catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             userOutput.printMessage(e.getLocalizedMessage());
+            isFile = false;
         }
-        for(Data data : fileMod.getData()){
-            storage.addItem(data);
-        }
-
-        greetMessage();
-
-        do{
-            initialMenu();
-            int index = userInput.countUserInput(options.length);
-            if (index == 0) index = 3;
-            input = options[index-1];
-            switch (input){
-                case "INSERT":
-                    userOutput.printMessage("Insert amount:");
-                    currentMoney = currentMoney.add(userInput.moneyUserInput());
-                    userOutput.printMessage(String.format("You have inserted amount [%.2f]",currentMoney));
-                    break;
-                case "SELECT":
-                    displayAvailable();
-                    userOutput.printMessage("Please enter item ID.");
-                    int itemId = userInput.countUserInput(storage.getLastId());
-                    latestItem = itemId;
-                    userOutput.printMessage(String.format("You have selected [%d] item",itemId));
-                    purchase(itemId);
-                    fileMod.writeFile(storage);
-                    break;
-                case "LIST":
-                    userOutput.printMessage("VENDING MACHINE MENU:");
-                    displayAvailable();
-                    break;
-                default:
-                    displayChange();
-                    userOutput.printMessage("Exiting the vending machine software.");
-                    break;
+        if (isFile) {
+            for (Data data : fileMod.getData()) {
+                storage.addItem(data);
             }
-        }while(input.compareTo(options[options.length-1])!=0);
 
+            greetMessage();
+
+            do {
+                initialMenu();
+                int index = userInput.getIntUserInput(options.length);
+                if (index == 0) index = 3;
+                input = options[index - 1];
+                switch (input) {
+                    case "INSERT":
+                        userOutput.printMessage("Insert amount:");
+                        currentMoney = currentMoney.add(userInput.moneyUserInput());
+                        userOutput.printMessage(String.format("You have inserted amount [%.2f]", currentMoney));
+                        break;
+                    case "SELECT":
+                        displayAvailable();
+                        userOutput.printMessage("Please enter item ID.");
+                        int itemId = userInput.getIntUserInput(storage.getLastId());
+                        latestItem = itemId;
+                        userOutput.printMessage(String.format("You have selected [%d] item", itemId));
+                        purchase(itemId);
+                        fileMod.writeFile(storage);
+                        break;
+                    case "LIST":
+                        userOutput.printMessage("VENDING MACHINE MENU:");
+                        displayAvailable();
+                        break;
+                    default:
+                        displayChange();
+                        userOutput.printMessage("Exiting the vending machine software.");
+                        break;
+                }
+            } while (input.compareTo(options[options.length - 1]) != 0);
+        }
+        else{
+            userOutput.printMessage("Please create item file and try running again. Thank you.");
+        }
     }
-    private void greetMessage(){
+
+    private void greetMessage() {
         userOutput.printMessage(
-                         "=====================\n" +
-                         "VENDING MACHINE MENU:");
+                "=====================\n" +
+                        "VENDING MACHINE MENU:");
         displayAvailable();
         userOutput.printMessage("=====================");
         userOutput.printMessage("Please insert money to select an item.");
@@ -92,52 +98,46 @@ public class Control {
         userOutput.printMessage("Please select the operation you wish to perform:");
         userOutput.printMessage(
                 "            1. Insert money.\n" +
-                "            2. Select item.\n" +
-                "            3. Display all items.\n" +
-                "            4. Exit the program."
+                        "            2. Select item.\n" +
+                        "            3. Display all items.\n" +
+                        "            4. Exit the program."
         );
     }
 
-    private void displayAvailable(){
-        Map<Integer,Data> items = storage.getItems().entrySet()
+    private void displayAvailable() {
+        Map<Integer, Data> items = storage.getItems().entrySet()
                 .stream()
-                .filter(map -> map.getValue().getAmount()>0)
+                .filter(map -> map.getValue().getAmount() > 0)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-        items.forEach((k,v) -> userOutput.printMessage(String.format("[%s] %s",k,v)));
+        items.forEach((k, v) -> userOutput.printMessage(String.format("[%s] %s", k, v)));
     }
 
     private void purchase(int id) throws InsufficientFundsException, NoItemInventoryException {
-        if(storage.getItem(id) == null){
+        if (storage.getItem(id) == null) {
             userOutput.printMessage("Sorry, invalid item id.");
-        }
-        else{
+        } else {
             Data item = storage.getItem(id);
-            if(item.getAmount()>0){
+            if (item.getAmount() > 0) {
                 BigDecimal cost = item.getPrice();
-                if(cost.compareTo(currentMoney) <= 0)
-                {
+                if (cost.compareTo(currentMoney) <= 0) {
                     currentMoney = currentMoney.subtract(cost);
-                    item.updateAmount(item.getAmount()-1);
-                    userOutput.printMessage(String.format("Successful purchase. Item price [%.2f]",cost));
+                    item.updateAmount(item.getAmount() - 1);
+                    userOutput.printMessage(String.format("Successful purchase. Item price [%.2f]", cost));
                     displayChange();
+                } else {
+                    throw new InsufficientFundsException(String.format("Sorry, insufficient funds. Current amount: [%.2f] item price [%.2f]", currentMoney, cost));
                 }
-                else
-                {
-                    throw new InsufficientFundsException(String.format("Sorry, insufficient funds. Current amount: [%.2f] item price [%.2f]",currentMoney,cost));
-                }
-            }
-            else
-            {
-                throw new NoItemInventoryException(String.format("The item [%s] %s is out of stock.",id,item.getName()));
+            } else {
+                throw new NoItemInventoryException(String.format("The item [%s] %s is out of stock.", id, item.getName()));
             }
         }
     }
 
-    private void displayChange(){
+    private void displayChange() {
         String message = "";
-        for(Cash coin : Cash.values()){
+        for (Cash coin : Cash.values()) {
             int coins = currentMoney.divide(coin.label).intValue();
-            if(coins > 0){
+            if (coins > 0) {
                 currentMoney = currentMoney.subtract(coin.label.multiply(new BigDecimal(coins)));
                 message += coin.name() + ":" + coins + " ";
             }
@@ -145,9 +145,9 @@ public class Control {
         userOutput.printMessage(message);
     }
 
-    public void logAudit(Exception e){
+    public void logAudit(Exception e) {
         //Create a log file with DAO with exception and time
-        Audit auditLog = new Audit(e.toString() + "::" + latestItem + "::" + currentMoney+ "£");
+        Audit auditLog = new Audit(e.toString() + "::" + latestItem + "::" + currentMoney + "£");
         auditLogger.writeFile(auditLog);
     }
 }

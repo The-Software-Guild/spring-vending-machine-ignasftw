@@ -1,13 +1,14 @@
 package SpringVendingMachine.servicelayer;
 
-public class NoItemInventoryException extends Exception{
+public class NoItemInventoryException extends Exception {
     String message;
-    public NoItemInventoryException(){
+
+    public NoItemInventoryException() {
         message = "The item is out of stock.";
         System.err.println(message);
     }
 
-    public NoItemInventoryException(String message){
+    public NoItemInventoryException(String message) {
         this.message = message;
         System.err.println(message);
     }
