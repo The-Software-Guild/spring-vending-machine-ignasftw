@@ -1,6 +1,6 @@
-package SpringVendingMachine.Controller;
+package SpringVendingMachine.controller;
 
-import SpringVendingMachine.DAO.Audit;
+import SpringVendingMachine.dao.Audit;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class AuditLogger {
-    private final String path = System.getProperty("user.dir")+"/src/main/java/VendingMachine/DAO/";
+    private final String path = System.getProperty("user.dir")+"/src/main/java/SpringVendingMachine/dao/";
     private List<Audit> audits = new ArrayList<>();
 
     public void writeFile(Audit data){

@@ -1,4 +1,4 @@
-package SpringVendingMachine.DAO;
+package SpringVendingMachine.dao;
 
 import java.util.HashMap;
 

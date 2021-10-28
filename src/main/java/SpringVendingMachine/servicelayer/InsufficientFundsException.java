@@ -1,4 +1,4 @@
-package SpringVendingMachine.ServiceLayer;
+package SpringVendingMachine.servicelayer;
 
 public class InsufficientFundsException extends Exception{
     String message;

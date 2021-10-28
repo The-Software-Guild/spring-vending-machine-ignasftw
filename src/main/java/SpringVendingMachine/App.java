@@ -1,10 +1,8 @@
 package SpringVendingMachine;
 
-import SpringVendingMachine.Controller.Control;
-import SpringVendingMachine.DAO.DataStorage;
-import SpringVendingMachine.ServiceLayer.InsufficientFundsException;
-import SpringVendingMachine.ServiceLayer.NoItemInventoryException;
-import SpringVendingMachine.View.UserInterface;
+import SpringVendingMachine.controller.Control;
+import SpringVendingMachine.servicelayer.InsufficientFundsException;
+import SpringVendingMachine.servicelayer.NoItemInventoryException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

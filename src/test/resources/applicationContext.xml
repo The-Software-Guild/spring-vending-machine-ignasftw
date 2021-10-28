@@ -16,5 +16,14 @@
           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
     <!-- Bean definitions go here -->
+    <bean id="userInterface" class="SpringVendingMachine.servicelayer.TestInterface"/>
 
+    <bean id="dataStorage" class="SpringVendingMachine.dao.DataStorage"/>
+
+    <bean id="controller"
+          class="SpringVendingMachine.controller.Control">
+        <constructor-arg ref="userInterface"/>
+        <constructor-arg ref="userInterface"/>
+        <constructor-arg ref="dataStorage"/>
+    </bean>
 </beans>

@@ -1,4 +1,4 @@
-package SpringVendingMachine.ServiceLayer;
+package SpringVendingMachine.servicelayer;
 
 public class NoItemInventoryException extends Exception{
     String message;

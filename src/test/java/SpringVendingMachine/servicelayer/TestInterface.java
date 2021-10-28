@@ -1,7 +1,7 @@
-package SpringVendingMachine.ServiceLayer;
+package SpringVendingMachine.servicelayer;
 
-import SpringVendingMachine.View.UserInput;
-import SpringVendingMachine.View.UserOutput;
+import SpringVendingMachine.view.UserInput;
+import SpringVendingMachine.view.UserOutput;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;

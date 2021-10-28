@@ -1,4 +1,4 @@
-package SpringVendingMachine.ServiceLayer;
+package SpringVendingMachine.servicelayer;
 
 import java.util.List;
 

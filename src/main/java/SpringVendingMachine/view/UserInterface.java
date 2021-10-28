@@ -1,4 +1,4 @@
-package SpringVendingMachine.View;
+package SpringVendingMachine.view;
 
 import java.math.BigDecimal;
 import java.util.Scanner;

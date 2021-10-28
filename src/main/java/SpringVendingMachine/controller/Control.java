@@ -1,13 +1,13 @@
-package SpringVendingMachine.Controller;
+package SpringVendingMachine.controller;
 
-import SpringVendingMachine.DAO.Audit;
-import SpringVendingMachine.DAO.Cash;
-import SpringVendingMachine.DAO.Data;
-import SpringVendingMachine.DAO.Storage;
-import SpringVendingMachine.ServiceLayer.InsufficientFundsException;
-import SpringVendingMachine.ServiceLayer.NoItemInventoryException;
-import SpringVendingMachine.View.UserInput;
-import SpringVendingMachine.View.UserOutput;
+import SpringVendingMachine.dao.Audit;
+import SpringVendingMachine.dao.Cash;
+import SpringVendingMachine.dao.Data;
+import SpringVendingMachine.dao.Storage;
+import SpringVendingMachine.servicelayer.InsufficientFundsException;
+import SpringVendingMachine.servicelayer.NoItemInventoryException;
+import SpringVendingMachine.view.UserInput;
+import SpringVendingMachine.view.UserOutput;
 
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;

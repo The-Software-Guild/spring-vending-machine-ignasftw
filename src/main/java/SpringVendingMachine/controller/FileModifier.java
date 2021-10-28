@@ -1,6 +1,6 @@
-package SpringVendingMachine.Controller;
-import SpringVendingMachine.DAO.Data;
-import SpringVendingMachine.DAO.Storage;
+package SpringVendingMachine.controller;
+import SpringVendingMachine.dao.Data;
+import SpringVendingMachine.dao.Storage;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class FileModifier {
     private List<Data> data = new ArrayList<>();
-    private final String path = System.getProperty("user.dir")+"/src/main/java/VendingMachine/DAO/";
+    private final String path = System.getProperty("user.dir")+"/src/main/java/SpringVendingMachine/dao/";
     private final File myObj = new File(path+"ItemStorage.txt");
 
     public void readFile() throws FileNotFoundException {
