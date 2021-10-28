@@ -20,7 +20,7 @@ public class AuditLogger {
             PrintWriter out = new PrintWriter(new FileWriter(path + "AuditLog.txt"));
             for (Audit row : audits) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                String formatDateTime = row.getOccurrence().format(formatter);
+                String formatDateTime = row.getTimeStamp().format(formatter);
 
                 out.println(String.format(
                         "[%s]::%s",

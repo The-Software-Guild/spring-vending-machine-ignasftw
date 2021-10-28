@@ -3,11 +3,11 @@ package SpringVendingMachine.dao;
 import java.time.LocalDateTime;
 
 public class Audit {
-    private final LocalDateTime occurrence;
+    private final LocalDateTime timeStamp;
     private final String message;
 
     public Audit(String message) {
-        occurrence = LocalDateTime.now();
+        timeStamp = LocalDateTime.now();
         this.message = message;
     }
 
@@ -15,7 +15,7 @@ public class Audit {
         return this.message;
     }
 
-    public LocalDateTime getOccurrence() {
-        return this.occurrence;
+    public LocalDateTime getTimeStamp() {
+        return this.timeStamp;
     }
 }
